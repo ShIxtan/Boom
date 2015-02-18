@@ -29,7 +29,13 @@
     var move = Circle.prototype.move = function(){
       this.sprite.x += this.dir[0];
       this.sprite.y += this.dir[1];
-      
+
+      if (this.sprite.x < 0 || this.sprite.x > 600){
+        this.dir[0] *= -1;
+      }
+      if (this.sprite.y < 0 || this.sprite.y > 600){
+        this.dir[1] *= -1;
+      }
     }
 
 })();
