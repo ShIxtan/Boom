@@ -29,6 +29,7 @@
     var move = Circle.prototype.move = function(){
       this.sprite.x += this.dir[0];
       this.sprite.y += this.dir[1];
+      
     }
 
 })();

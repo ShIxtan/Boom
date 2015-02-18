@@ -15,10 +15,14 @@
       }
     }
 
+    var randomPos = Boom.prototype.randomPos = function(){
+      return [Math.random() * 600, Math.random() * 600]
+    }
+
     var addCircle = Boom.prototype.addCircle = function(pos){
       circle = new Circle(pos);
       this.stage.addChild(circle.sprite);
-      circles.push(circle)
+      this.circles.push(circle)
     }
 
     var start = Boom.prototype.start = function(count){
@@ -28,7 +32,7 @@
     }
 
     var step = Boom.prototype.step = function step(){
-      circles.forEach(function(circle){
+      this.circles.forEach(function(circle){
         circle.move();
       })
     }
