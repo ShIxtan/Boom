@@ -2,25 +2,35 @@
 <html>
 <head>
   <title>boom</title>
-  <link rel="stylesheet" type="text/css" href="./css/main.css">
-  <script src="./js/pixi.js"></script>
-  <script src="./js/circle.js"></script>
-  <script src="./js/boom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.2.2/phaser.min.js"></script>
 </head>
 <body>
   <script>
 
-  // create an new instance of a pixi stage
-    var stage = new PIXI.Stage(0xeeeeee);
+  var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+  var bmd
 
-    // create a renderer instance.
-    var renderer = PIXI.autoDetectRenderer(600, 600);
+  function preload() {
+    bmd = game.add.bitmapData(800,600);
 
-    // add the renderer view element to the DOM
-    document.body.appendChild(renderer.view);
+    // Draw circle
+    bmd.ctx.fillStyle = '#999999';
+    bmd.ctx.beginPath();
+    bmd.ctx.arc(10, 10, 10, 0, Math.PI*2, true);
+    bmd.ctx.closePath();
+    bmd.ctx.fill();
+  }
 
-    game = new Boom( stage, renderer );
-    game.start(10);
+  var circles = [];
+
+  function create() {
+    for 
+    circles.push(sprite = game.add.sprite(200, 200, bmd));
+  }
+
+  function update() {
+
+  }
 
   </script>
 

@@ -14,8 +14,8 @@
       circle.drawCircle(0,0,100);
       var circleTexture = circle.generateTexture();
       var sprite = new PIXI.Sprite(circleTexture);
-      sprite.tint = 0xBEABEA;
-      sprite.scale = new PIXI.Point(0.1, 0.1);
+      sprite.tint = '0x' + Math.floor(Math.random()*16777215).toString(16);
+      sprite.scale = new PIXI.Point(0.07, 0.07);
       sprite.x = pos[0];
       sprite.y = pos[1];
 
