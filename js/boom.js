@@ -9,8 +9,14 @@
       this.circles = [];
     }
 
-    var addCircle = Boom.prototype.addCircle = function(){
-      circle = new Circle([300, 300]);
+    var addCircles = Boom.prototype.addCircles = function(count){
+      for (var i = 0; i < count; i++) {
+        this.addCircle(this.randomPos());
+      }
+    }
+
+    var addCircle = Boom.prototype.addCircle = function(pos){
+      circle = new Circle(pos);
       this.stage.addChild(circle.sprite);
       circles.push(circle)
     }
