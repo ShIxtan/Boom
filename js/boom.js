@@ -15,15 +15,16 @@
       circles.push(circle)
     }
 
-    var start = Boom.prototype.start = function(){
-      this.addCircle()
+    var start = Boom.prototype.start = function(count){
+      this.addCircles(count)
 
       requestAnimFrame( this.animate.bind(this) );
     }
 
     var step = Boom.prototype.step = function step(){
-      this.circle.sprite.x += this.circle.dir[0];
-      this.circle.sprite.y += this.circle.dir[1];
+      circles.forEach(function(circle){
+        circle.move();
+      })
     }
 
     var animate = Boom.prototype.animate = function animate() {
