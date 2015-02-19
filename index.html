@@ -10,8 +10,12 @@
   var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
   var bmd
 
+  function randomPos(){
+    return [Math.random() * 800, Math.random() * 600]
+  }
+
   function preload() {
-    bmd = game.add.bitmapData(800,600);
+    bmd = game.add.bitmapData(20,20);
 
     // Draw circle
     bmd.ctx.fillStyle = '#999999';
@@ -21,15 +25,27 @@
     bmd.ctx.fill();
   }
 
-  var circles = [];
+  var circles;
 
   function create() {
-    for 
-    circles.push(sprite = game.add.sprite(200, 200, bmd));
+    //sgame.world.setBounds(0, 0, 800, 600)
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    circles = game.add.group();
+
+    for (var i = 0; i < 10; i++){
+      var pos = randomPos();
+      var dest = randomPos();
+      cir = circles.create(pos[0], pos[1], bmd)
+      game.physics.arcade.enable(cir)
+      game.physics.arcade.accelerateToXY(cir, dest[0], dest[1], 60, 30, 30)
+      cir.body.bounce.setTo(1, 1);
+      cir.body.collideWorldBounds = true;
+    }
+
   }
 
   function update() {
-
+    //game.physics.arcade.collide(circles);
   }
 
   </script>
