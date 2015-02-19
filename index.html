@@ -53,8 +53,18 @@
   function update() {
     if (game.input.mousePointer.isDown && unclicked) {
       cir = addCircle([game.input.x, game.input.y])
+      expand(cir)
       unclicked = false;
     }
+  }
+
+  function expand(circle){
+    circle.body.velocity.x = 0;
+    circle.body.velocity.y = 0;
+    circle.scale.setTo(4,4);
+    setTimeout(function(){
+      circle.kill();
+    }, 2000)
   }
 
   </script>
