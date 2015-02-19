@@ -37,12 +37,13 @@
     bmd.ctx.closePath();
     bmd.ctx.fill();
   }
-
+  var expanded;
   var circles;
 
   function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     circles = game.add.group();
+    expanded = game.add.group();
 
     for (var i = 0; i < 10; i++){
       var pos = randomPos();
@@ -51,6 +52,9 @@
   }
 
   function update() {
+    if (!unclicked){
+      game.physics.arcade.overlap(expanded, circles, collisionHandler, null, this);
+    }
     if (game.input.mousePointer.isDown && unclicked) {
       cir = addCircle([game.input.x, game.input.y])
       expand(cir)
@@ -61,10 +65,17 @@
   function expand(circle){
     circle.body.velocity.x = 0;
     circle.body.velocity.y = 0;
+    circle.immovable = true;
     circle.scale.setTo(4,4);
     setTimeout(function(){
       circle.kill();
     }, 2000)
+    circle.expanded = true;
+    expanded.add(circle);
+  }
+
+  function collisionHandler(expanded, circle){
+    expand(circle);
   }
 
   </script>
