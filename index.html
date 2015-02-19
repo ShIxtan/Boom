@@ -15,6 +15,18 @@
     return [Math.random() * 800, Math.random() * 600]
   }
 
+  function addCircle(pos){
+    cir = circles.create(pos[0], pos[1], bmd)
+    cir.anchor.setTo(0.5, 0.5);
+    game.physics.arcade.enable(cir)
+    cir.body.velocity.x = game.rnd.integerInRange(-100, 100);
+    cir.body.velocity.y = game.rnd.integerInRange(-100, 100);
+    cir.body.bounce.setTo(1, 1);
+    cir.body.collideWorldBounds = true;
+    cir.tint = '0x' + Math.floor(Math.random()*16777215).toString(16);
+    return cir;
+  }
+
   function preload() {
     bmd = game.add.bitmapData(20,20);
 
@@ -34,23 +46,13 @@
 
     for (var i = 0; i < 10; i++){
       var pos = randomPos();
-      cir = circles.create(pos[0], pos[1], bmd)
-      cir.anchor.setTo(0.5, 0.5);
-      game.physics.arcade.enable(cir)
-      cir.body.velocity.x = game.rnd.integerInRange(-100, 100);
-      cir.body.velocity.y = game.rnd.integerInRange(-100, 100);
-      cir.body.bounce.setTo(1, 1);
-      cir.body.collideWorldBounds = true;
-      cir.tint = '0x' + Math.floor(Math.random()*16777215).toString(16);
+      addCircle(pos)
     }
   }
 
   function update() {
     if (game.input.mousePointer.isDown && unclicked) {
-      cir = circles.create(game.input.x, game.input.y, bmd)
-      cir.anchor.setTo(0.5, 0.5);
-      game.physics.arcade.enable(cir)
-      cir.tint = '0x' + Math.floor(Math.random()*16777215).toString(16);
+      cir = addCircle([game.input.x, game.input.y])
       unclicked = false;
     }
   }
