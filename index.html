@@ -8,15 +8,18 @@
   <script>
 
   var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-  var bmd
+  var smallBMP
+  var largeBMP
   var unclicked = true;
+  var expanded;
+  var circles;
 
   function randomPos(){
     return [Math.random() * 800, Math.random() * 600]
   }
 
   function addCircle(pos){
-    cir = circles.create(pos[0], pos[1], bmd)
+    var cir = circles.create(pos[0], pos[1], smallBMP)
     cir.anchor.setTo(0.5, 0.5);
     game.physics.arcade.enable(cir)
     cir.body.velocity.x = game.rnd.integerInRange(-100, 100);
@@ -27,18 +30,36 @@
     return cir;
   }
 
+  function addLarge(pos, tint){
+    var cir = expanded.create(pos[0], pos[1], largeBMP)
+    cir.anchor.setTo(0.5, 0.5);
+    game.physics.arcade.enable(cir)
+    cir.expanded = true;
+    cir.tint = tint;
+    setTimeout(function(){
+      cir.kill();
+    }, 2000)
+  }
+
   function preload() {
-    bmd = game.add.bitmapData(20,20);
+    smallBMP = game.add.bitmapData(20,20);
 
     // Draw circle
-    bmd.ctx.fillStyle = '#999999';
-    bmd.ctx.beginPath();
-    bmd.ctx.arc(10, 10, 10, 0, Math.PI*2, true);
-    bmd.ctx.closePath();
-    bmd.ctx.fill();
+    smallBMP.ctx.fillStyle = '#999999';
+    smallBMP.ctx.beginPath();
+    smallBMP.ctx.arc(10, 10, 10, 0, Math.PI*2, true);
+    smallBMP.ctx.closePath();
+    smallBMP.ctx.fill();
+
+    largeBMP = game.add.bitmapData(80,80);
+
+    // Draw circle
+    largeBMP.ctx.fillStyle = '#999999';
+    largeBMP.ctx.beginPath();
+    largeBMP.ctx.arc(40, 40, 40, 0, Math.PI*2, true);
+    largeBMP.ctx.closePath();
+    largeBMP.ctx.fill();
   }
-  var expanded;
-  var circles;
 
   function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -63,15 +84,8 @@
   }
 
   function expand(circle){
-    circle.body.velocity.x = 0;
-    circle.body.velocity.y = 0;
-    circle.immovable = true;
-    circle.scale.setTo(4,4);
-    setTimeout(function(){
-      circle.kill();
-    }, 2000)
-    circle.expanded = true;
-    expanded.add(circle);
+    addLarge([circle.x, circle.y], circle.tint)
+    circle.kill();
   }
 
   function collisionHandler(expanded, circle){
