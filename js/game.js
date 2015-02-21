@@ -22,6 +22,7 @@ Boom.Game.prototype = {
   },
 
   create: function() {
+    this.popSound = this.game.add.audio('pop');
     this.physics.startSystem(Phaser.Physics.ARCADE);
     this.circles = this.add.group();
     this.expanded = this.add.group();
@@ -58,6 +59,7 @@ Boom.Game.prototype = {
     this.circles.remove(circle);
     circle.body.velocity.x = 0;
     circle.body.velocity.y = 0;
+    this.popSound.play();
     setTimeout(function(){
       var tween = this.add.tween(circle.scale).to({ x: 0.1, y: 0.1}, 200, Phaser.Easing.Bounce.Out, true)
       tween.onComplete.add(function(){

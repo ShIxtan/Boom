@@ -9,3 +9,4 @@ This is a clone of the addicting flash game Boomshine. It's done in javascript, 
 - [x] levels
 - [x] restart on game over
 - [ ] prettier start/end screens
+- [ ] get working on mobile
