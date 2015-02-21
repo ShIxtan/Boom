@@ -1,8 +1,14 @@
 Boom.Game = function (game){
-  this.unclicked = true;
 }
 
 Boom.Game.prototype = {
+  init: function(goal, circleCount, level){
+    this.unclicked = true;
+    this.score = 0;
+    this.goal = goal;
+    this.circleCount = circleCount
+    this.level = level
+  },
 
   preload: function() {
     this.smallBMP = this.add.bitmapData(20,20);
@@ -29,13 +35,10 @@ Boom.Game.prototype = {
     this.circles = this.add.group();
     this.expanded = this.add.group();
 
-    for (var i = 0; i < 5; i++){
+    for (var i = 0; i < this.circleCount; i++){
       var pos = this.randomPos();
       this.addCircle(pos)
     }
-
-    this.score = 0;
-    this.goal = 2
 
     this.text = this.add.text(0, 0, "0 / " + this.goal, {
       font: "65px Arial",
@@ -97,6 +100,6 @@ Boom.Game.prototype = {
   },
 
   gameOver: function(){
-
+    this.state.start("Over", true, false, this.score, this.goal, this.level)
   }
 }

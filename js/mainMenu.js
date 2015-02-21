@@ -14,22 +14,17 @@ Boom.MainMenu.prototype = {
           font: "65px Arial",
           fill: "#ff0044",
     });
-
-		this.playButton = this.add.button(400, 600, 'playButton', this.startGame, this, 'buttonOver', 'buttonOut', 'buttonOver');
-
 	},
 
 	update: function () {
     if (this.input.mousePointer.isDown){
       this.startGame();
     }
-		//	Do some nice funky main menu effect here
-
 	},
 
 	startGame: function (pointer) {
 		//	And start the actual game
-		this.state.start('Game');
+		this.state.start('Game', true, false, 2, 5, 1);
 	}
 
 };

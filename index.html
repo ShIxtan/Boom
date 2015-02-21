@@ -1,12 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>boom</title>
+  <title>Boom!</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.2.2/phaser.min.js"></script>
   <script src="./js/boot.js"></script>
   <script src="./js/game.js"></script>
   <script src="./js/preloader.js"></script>
   <script src="./js/mainMenu.js"></script>
+  <script src="./js/over.js"></script>
 </head>
 
 <body>
@@ -18,6 +19,7 @@
 	    game.state.add('Preloader', Boom.Preloader);
       game.state.add('MainMenu', Boom.MainMenu);
 	    game.state.add('Game', Boom.Game);
+      game.state.add('Over', Boom.Over)
 
       game.state.start('Boot');
     }
