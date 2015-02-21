@@ -9,22 +9,22 @@ Boom.Over.prototype = {
   },
 
 	create: function () {
-    text = this.add.text(0, 0, "Click Anywhere to Start!", {
-          font: "65px Arial",
-          fill: "#ff0044",
-    });
-
     if (this.score < this.goal){
-      scoreText = this.add.text(200, 200, this.score + " / " + this.goal + "  Try Again!", {
+      scoreText = this.add.text(200, 200, this.score + " / " + this.goal + " Click Anywhere to Try Again!", {
             font: "40px Arial",
             fill: "#ff0044",
       });
     } else {
-      scoreText = this.add.text(200, 200, this.score + " / " + this.goal + "  Next level!", {
+      scoreText = this.add.text(200, 200, this.score + " / " + this.goal + " Click Anywhere for Next level!", {
             font: "40px Arial",
-            fill: "#ff0044",
+            fill: "#4400ff",
       });
       this.level += 1;
+    }
+
+    if (this.level > 10){
+      scoreText.setText("You Win! Try again?")
+      this.level = 1;
     }
 	},
 
