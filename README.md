@@ -3,7 +3,8 @@
 This is a clone of the addicting flash game Boomshine. It's done in javascript, using the phaser framework.
 
 ## To-Do
-- [ ] start screen
+- [x] start screen
 - [ ] audio
 - [ ] animations for ball expanding/deflating
-- [ ] levels / restart
+- [x] levels
+- [ ] restart on game over
