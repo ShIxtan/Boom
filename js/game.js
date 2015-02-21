@@ -76,7 +76,11 @@ function create() {
 
 function update() {
   if (!unclicked){
-    game.physics.arcade.overlap(expanded, circles, collisionHandler, null, this);
+    if (expanded.countLiving() > 0){
+      game.physics.arcade.overlap(expanded, circles, collisionHandler, null, this);
+    } else {
+      gameOver();
+    }
   }
   if (game.input.mousePointer.isDown && unclicked) {
     cir = addCircle([game.input.x, game.input.y])
@@ -94,4 +98,8 @@ function collisionHandler(expanded, circle){
   expand(circle);
   score += 1;
   text.setText(score + " / " + goal);
+}
+
+function gameOver(){
+  
 }
