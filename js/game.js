@@ -1,105 +1,102 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-var smallBMP
-var largeBMP
-var unclicked = true;
-var expanded;
-var circles;
-var goal;
-var score;
-var text;
-
-function randomPos(){
-  return [Math.random() * 800, Math.random() * 600];
+Boom.Game = function (game){
+  this.unclicked = true;
 }
 
-function addCircle(pos){
-  var cir = circles.create(pos[0], pos[1], smallBMP)
-  cir.anchor.setTo(0.5, 0.5);
-  game.physics.arcade.enable(cir)
-  cir.body.velocity.x = game.rnd.integerInRange(-100, 100);
-  cir.body.velocity.y = game.rnd.integerInRange(-100, 100);
-  cir.body.bounce.setTo(1, 1);
-  cir.body.collideWorldBounds = true;
-  cir.tint = '0x' + Math.floor(Math.random()*16777215).toString(16);
-  return cir;
-}
+Boom.Game.prototype = {
 
-function addLarge(pos, tint){
-  var cir = expanded.create(pos[0], pos[1], largeBMP)
-  cir.anchor.setTo(0.5, 0.5);
-  game.physics.arcade.enable(cir)
-  cir.expanded = true;
-  cir.tint = tint;
-  setTimeout(function(){
-    cir.kill();
-  }, 2000)
-}
+  preload: function() {
+    this.smallBMP = this.add.bitmapData(20,20);
 
-function preload() {
-  smallBMP = game.add.bitmapData(20,20);
+    // Draw circle
+    this.smallBMP.ctx.fillStyle = '#999999';
+    this.smallBMP.ctx.beginPath();
+    this.smallBMP.ctx.arc(10, 10, 10, 0, Math.PI*2, true);
+    this.smallBMP.ctx.closePath();
+    this.smallBMP.ctx.fill();
 
-  // Draw circle
-  smallBMP.ctx.fillStyle = '#999999';
-  smallBMP.ctx.beginPath();
-  smallBMP.ctx.arc(10, 10, 10, 0, Math.PI*2, true);
-  smallBMP.ctx.closePath();
-  smallBMP.ctx.fill();
+    this.largeBMP = this.add.bitmapData(80,80);
 
-  largeBMP = game.add.bitmapData(80,80);
+    // Draw circle
+    this.largeBMP.ctx.fillStyle = '#999999';
+    this.largeBMP.ctx.beginPath();
+    this.largeBMP.ctx.arc(40, 40, 40, 0, Math.PI*2, true);
+    this.largeBMP.ctx.closePath();
+    this.largeBMP.ctx.fill();
+  },
 
-  // Draw circle
-  largeBMP.ctx.fillStyle = '#999999';
-  largeBMP.ctx.beginPath();
-  largeBMP.ctx.arc(40, 40, 40, 0, Math.PI*2, true);
-  largeBMP.ctx.closePath();
-  largeBMP.ctx.fill();
-}
+  create: function() {
+    this.physics.startSystem(Phaser.Physics.ARCADE);
+    this.circles = this.add.group();
+    this.expanded = this.add.group();
 
-function create() {
-  game.physics.startSystem(Phaser.Physics.ARCADE);
-  circles = game.add.group();
-  expanded = game.add.group();
-
-  for (var i = 0; i < 5; i++){
-    var pos = randomPos();
-    addCircle(pos)
-  }
-
-  score = 0;
-  goal = 2
-
-  text = game.add.text(0, 0, "0 / " + goal, {
-        font: "65px Arial",
-        fill: "#ff0044",
-  });
-}
-
-function update() {
-  if (!unclicked){
-    if (expanded.countLiving() > 0){
-      game.physics.arcade.overlap(expanded, circles, collisionHandler, null, this);
-    } else {
-      gameOver();
+    for (var i = 0; i < 5; i++){
+      var pos = this.randomPos();
+      this.addCircle(pos)
     }
+
+    this.score = 0;
+    this.goal = 2
+
+    this.text = this.add.text(0, 0, "0 / " + this.goal, {
+      font: "65px Arial",
+      fill: "#ff0044",
+    });
+  },
+
+  update: function() {
+    if (!this.unclicked){
+      if (this.expanded.countLiving() > 0){
+        this.physics.arcade.overlap(this.expanded, this.circles, this.collisionHandler, null, this);
+      } else {
+        this.gameOver();
+      }
+    }
+    if (this.input.mousePointer.isDown && this.unclicked) {
+      cir = this.addCircle([this.input.x, this.input.y])
+      this.expand(cir)
+      this.unclicked = false;
+    }
+  },
+
+  expand: function(circle){
+    this.addLarge([circle.x, circle.y], circle.tint)
+    circle.kill();
+  },
+
+  randomPos: function(){
+    return [Math.random() * 800, Math.random() * 600];
+  },
+
+  addCircle: function(pos){
+    var cir = this.circles.create(pos[0], pos[1], this.smallBMP)
+    cir.anchor.setTo(0.5, 0.5);
+    this.physics.arcade.enable(cir)
+    cir.body.velocity.x = this.rnd.integerInRange(-100, 100);
+    cir.body.velocity.y = this.rnd.integerInRange(-100, 100);
+    cir.body.bounce.setTo(1, 1);
+    cir.body.collideWorldBounds = true;
+    cir.tint = '0x' + Math.floor(Math.random()*16777215).toString(16);
+    return cir;
+  },
+
+  addLarge: function(pos, tint){
+    var cir = this.expanded.create(pos[0], pos[1], this.largeBMP)
+    cir.anchor.setTo(0.5, 0.5);
+    this.physics.arcade.enable(cir)
+    cir.expanded = true;
+    cir.tint = tint;
+    setTimeout(function(){
+      cir.kill();
+    }, 2000)
+  },
+
+  collisionHandler: function(expanded, circle){
+    this.expand(circle);
+    this.score += 1;
+    this.text.setText(this.score + " / " + this.goal);
+  },
+
+  gameOver: function(){
+
   }
-  if (game.input.mousePointer.isDown && unclicked) {
-    cir = addCircle([game.input.x, game.input.y])
-    expand(cir)
-    unclicked = false;
-  }
-}
-
-function expand(circle){
-  addLarge([circle.x, circle.y], circle.tint)
-  circle.kill();
-}
-
-function collisionHandler(expanded, circle){
-  expand(circle);
-  score += 1;
-  text.setText(score + " / " + goal);
-}
-
-function gameOver(){
-  
 }
