@@ -11,15 +11,6 @@ Boom.Game.prototype = {
   },
 
   preload: function() {
-    this.smallBMP = this.add.bitmapData(20,20);
-
-    // Draw circle
-    this.smallBMP.ctx.fillStyle = '#999999';
-    this.smallBMP.ctx.beginPath();
-    this.smallBMP.ctx.arc(10, 10, 10, 0, Math.PI*2, true);
-    this.smallBMP.ctx.closePath();
-    this.smallBMP.ctx.fill();
-
     this.largeBMP = this.add.bitmapData(80,80);
 
     // Draw circle
@@ -62,8 +53,17 @@ Boom.Game.prototype = {
   },
 
   expand: function(circle){
-    this.addLarge([circle.x, circle.y], circle.tint)
-    circle.kill();
+    this.add.tween(circle.scale).to({ x: 1, y: 1}, 200, Phaser.Easing.Bounce.Out, true)
+    this.expanded.add(circle);
+    this.circles.remove(circle);
+    circle.body.velocity.x = 0;
+    circle.body.velocity.y = 0;
+    setTimeout(function(){
+      var tween = this.add.tween(circle.scale).to({ x: 0.1, y: 0.1}, 200, Phaser.Easing.Bounce.Out, true)
+      tween.onComplete.add(function(){
+        circle.kill();
+      }, this)
+    }.bind(this), 2000)
   },
 
   randomPos: function(){
@@ -71,8 +71,9 @@ Boom.Game.prototype = {
   },
 
   addCircle: function(pos){
-    var cir = this.circles.create(pos[0], pos[1], this.smallBMP)
+    var cir = this.circles.create(pos[0], pos[1], this.largeBMP)
     cir.anchor.setTo(0.5, 0.5);
+    cir.scale.setTo(.25, .25);
     this.physics.arcade.enable(cir)
     cir.body.velocity.x = this.rnd.integerInRange(-100, 100);
     cir.body.velocity.y = this.rnd.integerInRange(-100, 100);
@@ -80,17 +81,6 @@ Boom.Game.prototype = {
     cir.body.collideWorldBounds = true;
     cir.tint = '0x' + Math.floor(Math.random()*16777215).toString(16);
     return cir;
-  },
-
-  addLarge: function(pos, tint){
-    var cir = this.expanded.create(pos[0], pos[1], this.largeBMP)
-    cir.anchor.setTo(0.5, 0.5);
-    this.physics.arcade.enable(cir)
-    cir.expanded = true;
-    cir.tint = tint;
-    setTimeout(function(){
-      cir.kill();
-    }, 2000)
   },
 
   collisionHandler: function(expanded, circle){

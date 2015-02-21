@@ -5,7 +5,7 @@ This is a clone of the addicting flash game Boomshine. It's done in javascript, 
 ## To-Do
 - [x] start screen
 - [ ] audio
-- [ ] animations for ball expanding/deflating
+- [x] animations for ball expanding/deflating
 - [x] levels
 - [x] restart on game over
 - [ ] prettier start/end screens
