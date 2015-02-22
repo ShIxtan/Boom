@@ -11,8 +11,9 @@ body {
 
 #gameContainer h1{
   width: 800px;
+  height: 100px;
   border-radius: 5px;
   text-align: center;
-  background: rgba(234,195,136, 0.8);
+  background: rgba(234,195,136, 0.95);
   color: rgb(221,66,62);
 }
