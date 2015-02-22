@@ -55,6 +55,7 @@ Boom.Game.prototype = {
 
   expand: function(circle){
     this.add.tween(circle.scale).to({ x: 1, y: 1}, 200, Phaser.Easing.Bounce.Out, true)
+    this.add.tween(circle.sprite).to({ alpha: 0.7}, 200, Phaser.Easing.Bounce.Out, true)
     this.expanded.add(circle);
     this.circles.remove(circle);
     circle.body.velocity.x = 0;
