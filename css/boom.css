@@ -6,4 +6,5 @@ body {
 #gameContainer {
   position: relative;
   margin: auto;
+  width: 800px;
 }
