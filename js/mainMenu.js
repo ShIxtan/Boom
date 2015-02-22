@@ -10,10 +10,12 @@ Boom.MainMenu.prototype = {
 		//	Naturally I expect you to do something significantly better :)
 
 		//this.add.sprite(0, 0, 'titlepage');
-    this.text = this.add.text(400, 200, "Click Anywhere to Start!", {
-          font: "50px Arial",
-          fill: "#DD423E",
-					align: "center"
+    this.text = this.add.text(400, 200, "You get one click, \n\n
+																					Try to burst as many bubbles as possible!\n\n
+																					Click Anywhere to Start!", {
+																															          font: "30px Arial",
+																															          fill: "#EAC388",
+																																				align: "center"
     });
 
 		this.text.x = 400 - (this.text.width * 0.5);
