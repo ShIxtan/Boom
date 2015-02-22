@@ -36,6 +36,8 @@ Boom.Game.prototype = {
       font: "65px Arial",
       fill: "#ffffff",
     });
+
+    this.text.x = 800 - (this.text.width);
   },
 
   update: function() {
@@ -90,6 +92,7 @@ Boom.Game.prototype = {
     this.expand(circle);
     this.score += 1;
     this.text.setText(this.score + " / " + this.goal);
+    this.text.x = 800 - (this.text.width * 0.5);
   },
 
   gameOver: function(){
