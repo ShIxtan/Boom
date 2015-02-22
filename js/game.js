@@ -37,7 +37,7 @@ Boom.Game.prototype = {
       fill: "#EAC388",
     });
 
-    this.text.x = 800 - (this.text.width);
+    this.text.x = 800 - (this.text.width + 10);
   },
 
   update: function() {
@@ -92,7 +92,7 @@ Boom.Game.prototype = {
     this.expand(circle);
     this.score += 1;
     this.text.setText(this.score + " / " + this.goal);
-    this.text.x = 800 - (this.text.width);
+    this.text.x = 800 - (this.text.width + 10);
   },
 
   gameOver: function(){

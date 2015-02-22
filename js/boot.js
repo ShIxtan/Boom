@@ -9,6 +9,7 @@ Boom.Boot.prototype = {
     init: function () {
         this.input.maxPointers = 1;
         this.stage.disableVisibilityChange = false;
+        this.stage.backgroundColor = "#3F2C26";
     },
 
     preload: function () {
