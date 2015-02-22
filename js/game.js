@@ -92,7 +92,7 @@ Boom.Game.prototype = {
     this.expand(circle);
     this.score += 1;
     this.text.setText(this.score + " / " + this.goal);
-    this.text.x = 800 - (this.text.width * 0.5);
+    this.text.x = 800 - (this.text.width);
   },
 
   gameOver: function(){
