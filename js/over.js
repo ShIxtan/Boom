@@ -10,13 +10,13 @@ Boom.Over.prototype = {
 
 	create: function () {
     if (this.score < this.goal){
-      scoreText = this.add.text(400, 200, this.score + " / " + this.goal + " - Almost There!\n\nClick Anywhere to Try Again!", {
+      var scoreText = this.add.text(400, 200, this.score + " / " + this.goal + " - Almost There!\n\nClick Anywhere to Try Again!", {
             font: "40px Arial",
             fill: "#ff0044",
             align: "center"
       });
     } else {
-      scoreText = this.add.text(400, 200, this.score + " / " + this.goal + " - Great Job!\n\nClick Anywhere for Next level!", {
+      var scoreText = this.add.text(400, 200, this.score + " / " + this.goal + " - Great Job!\n\nClick Anywhere for Next level!", {
             font: "40px Arial",
             fill: "#3BC936",
             align: "center"
@@ -29,7 +29,7 @@ Boom.Over.prototype = {
       this.level = 1;
     }
 
-    scoreText.x = scoreText.x - (scoreText.textWidth * 0.5);
+    scoreText.x = 400 - (scoreText.textWidth * 0.5);
 	},
 
 	update: function () {
