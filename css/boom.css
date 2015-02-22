@@ -8,3 +8,11 @@ body {
   margin: auto;
   width: 800px;
 }
+
+#gameContainer h1{
+  width: 800px;
+  border-radius: 5px;
+  text-align: center;
+  background: rgba(234,195,136, 0.8);
+  color: rgb(221,66,62);
+}
