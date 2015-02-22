@@ -10,12 +10,13 @@ body {
 }
 
 #gameContainer h1{
-  width: 100px;
+  width: 150px;
   height: 50px;
   border-radius: 5px;
   text-align: center;
   background: rgba(234,195,136, 0.95);
   font-size: 40px;
-  padding: 10px;
+  padding: 15px;
   margin: auto;
+  margin-bottom: 20px;
 }
