@@ -28,6 +28,8 @@ Boom.Over.prototype = {
       scoreText.setText("You Win! \n\n Try again?")
       this.level = 1;
     }
+    
+    scoreText.x = posX - (scoreText.textWidth * 0.5);
 	},
 
 	update: function () {
