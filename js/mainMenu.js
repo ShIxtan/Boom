@@ -16,7 +16,7 @@ Boom.MainMenu.prototype = {
 					align: "center"
     });
 
-		text.x = text.x - (text.textWidth * 0.5);
+		//text.x = text.x - (text.textWidth * 0.5);
 	},
 
 	update: function () {
