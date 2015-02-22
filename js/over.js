@@ -29,7 +29,7 @@ Boom.Over.prototype = {
       this.level = 1;
     }
 
-    this.scoreText.x = 400 - (this.scoreText.textWidth * 0.5);
+    this.scoreText.x = 400 - (this.scoreText.width * 0.5);
 	},
 
 	update: function () {
