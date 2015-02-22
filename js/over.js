@@ -13,11 +13,13 @@ Boom.Over.prototype = {
       scoreText = this.add.text(0, 200, this.score + " / " + this.goal + " - Almost There!\n\nClick Anywhere to Try Again!", {
             font: "40px Arial",
             fill: "#ff0044",
+            align: "center"
       });
     } else {
       scoreText = this.add.text(0, 200, this.score + " / " + this.goal + " - Great Job!\n\nClick Anywhere for Next level!", {
             font: "40px Arial",
             fill: "#3BC936",
+            align: "center"
       });
       this.level += 1;
     }
