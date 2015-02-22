@@ -12,7 +12,7 @@ Boom.MainMenu.prototype = {
 		//this.add.sprite(0, 0, 'titlepage');
     this.text = this.add.text(400, 200, "Click Anywhere to Start!", {
           font: "50px Arial",
-          fill: "#ff0044",
+          fill: "#DD423E",
 					align: "center"
     });
 

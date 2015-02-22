@@ -10,15 +10,15 @@ Boom.Over.prototype = {
 
 	create: function () {
     if (this.score < this.goal){
-      this.scoreText = this.add.text(400, 200, this.score + " / " + this.goal + " - Almost There!\n\nClick Anywhere to Try Again!", {
+      this.scoreText = this.add.text(400, 200, this.score + " / " + this.goal + "\n\nAlmost There!\n\nClick Anywhere to Try Again!", {
             font: "40px Arial",
-            fill: "#ff0044",
+            fill: "#DD423E",
             align: "center"
       });
     } else {
-      this.scoreText = this.add.text(400, 200, this.score + " / " + this.goal + " - Great Job!\n\nClick Anywhere for Next level!", {
+      this.scoreText = this.add.text(400, 200, this.score + " / " + this.goal + "\n\nGreat Job!\n\nClick Anywhere for Next level!", {
             font: "40px Arial",
-            fill: "#3BC936",
+            fill: "#C5AD4B",
             align: "center"
       });
       this.level += 1;

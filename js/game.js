@@ -34,7 +34,7 @@ Boom.Game.prototype = {
 
     this.text = this.add.text(0, 0, "0 / " + this.goal, {
       font: "65px Arial",
-      fill: "#ffffff",
+      fill: "#EAC388",
     });
 
     this.text.x = 800 - (this.text.width);
